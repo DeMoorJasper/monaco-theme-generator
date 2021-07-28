@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "ts-node ./src/index.ts"
+    "generate": "ts-node ./src/index.ts"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",

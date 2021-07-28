@@ -17,7 +17,7 @@ export function convertTheme(
 
   theme.tokenColors.map((color) => {
     if (!color.scope) {
-      return;
+      color.scope = "";
     }
 
     const colorScopes: Array<string> =

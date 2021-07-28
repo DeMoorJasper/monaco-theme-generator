@@ -3,12 +3,12 @@ import { IColorSet } from "vscode-theme-generator";
 export const THEME_NAME: string = "codesandbox-dark";
 
 export const COLOR_SET: IColorSet = {
-    base: {
-      background: "#12171F",
-      foreground: "#EFEFEF",
-      color1: "#399EF4",
-      color2: "#DA6771",
-      color3: "#4EB071",
-      color4: "#FFF099",
-    },
-  };
+  base: {
+    background: "#151515",
+    foreground: "#E5E5E5",
+    color1: "#A080FF",
+    color2: "#808080",
+    color3: "#A080FF",
+    color4: "#3DC9B0",
+  },
+};
