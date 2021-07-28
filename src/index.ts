@@ -24,7 +24,11 @@ async function generate() {
 
   const monacoThemeFilePath = path.join(MONACO_OUT_DIR, THEME_FILE_NAME);
   const monacoTheme = convertTheme(generatedTheme);
-  await fs.writeJSON(monacoThemeFilePath, monacoTheme);
+  await fs.writeFile(
+    monacoThemeFilePath,
+    JSON.stringify(monacoTheme, null, "  "),
+    "utf-8"
+  );
 }
 
 generate().catch((err) => {
