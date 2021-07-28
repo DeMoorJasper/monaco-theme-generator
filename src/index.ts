@@ -7,25 +7,21 @@ import { convertTheme } from "./converter/index";
 import { COLOR_SET, THEME_NAME } from "./config";
 
 const OUT_DIR = path.join(process.cwd(), "out");
-const VSCODE_OUT_DIR = path.join(OUT_DIR, "vscode");
-const MONACO_OUT_DIR = path.join(OUT_DIR, "monaco");
 const THEME_FILE_NAME = `${THEME_NAME}.json`;
 
 async function generate() {
-  await fs.ensureDir(VSCODE_OUT_DIR);
-  await fs.ensureDir(MONACO_OUT_DIR);
+  await fs.ensureDir(OUT_DIR);
 
-  const vscodeThemeFilePath = path.join(VSCODE_OUT_DIR, THEME_FILE_NAME);
-  generateTheme(THEME_NAME, COLOR_SET, vscodeThemeFilePath);
+  // TODO: Fork generate-theme...
+  const tempFilepath = path.join(OUT_DIR, "temp.json");
+  generateTheme(THEME_NAME, COLOR_SET, tempFilepath);
+  const generatedTheme = JSON.parse(await fs.readFile(tempFilepath, "utf-8"));
+  await fs.remove(tempFilepath);
 
-  const generatedTheme = JSON.parse(
-    await fs.readFile(vscodeThemeFilePath, "utf-8")
-  );
-
-  const monacoThemeFilePath = path.join(MONACO_OUT_DIR, THEME_FILE_NAME);
+  const themeFilepath = path.join(OUT_DIR, THEME_FILE_NAME);
   const monacoTheme = convertTheme(generatedTheme);
   await fs.writeFile(
-    monacoThemeFilePath,
+    themeFilepath,
     JSON.stringify(monacoTheme, null, "  "),
     "utf-8"
   );

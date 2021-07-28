@@ -1,21 +1,21 @@
 import * as monaco from "monaco-editor-core";
 
 import { IVSCodeTheme, IMonacoThemeRule } from "./interfaces";
+import { MONACO_COLOR_KEYS } from "./monaco-colors";
 export * from "./interfaces";
 
 export function convertTheme(
-  theme: IVSCodeTheme
+  input: IVSCodeTheme
 ): monaco.editor.IStandaloneThemeData {
-  const monacoThemeRule: IMonacoThemeRule = [];
-  const returnTheme: monaco.editor.IStandaloneThemeData = {
+  const theme: monaco.editor.IStandaloneThemeData = {
     inherit: false,
     base: "vs-dark",
-    colors: theme.colors,
-    rules: monacoThemeRule,
+    colors: {},
+    rules: [],
     encodedTokensColors: [],
   };
 
-  theme.tokenColors.map((color) => {
+  input.tokenColors.map((color) => {
     if (!color.scope) {
       color.scope = "";
     }
@@ -26,7 +26,7 @@ export function convertTheme(
         : color.scope;
 
     for (const scope of colorScopes) {
-      monacoThemeRule.push(
+      theme.rules.push(
         Object.assign({
           ...color.settings,
           token: scope,
@@ -35,5 +35,11 @@ export function convertTheme(
     }
   });
 
-  return returnTheme;
+  for (const colorKey of Object.keys(input.colors)) {
+    if (MONACO_COLOR_KEYS.includes(colorKey)) {
+      theme.colors[colorKey] = input.colors[colorKey];
+    }
+  }
+
+  return theme;
 }
