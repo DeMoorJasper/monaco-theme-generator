@@ -1,3 +1,4 @@
+// See https://github.com/microsoft/monaco-editor/issues/1631#issuecomment-541910487
 export const MONACO_COLOR_KEYS = [
   "foreground",
   "errorForeground",
