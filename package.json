@@ -1,0 +1,19 @@
+{
+  "name": "monaco-theme-generator",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node ./src/index.ts"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "monaco-editor-core": "^0.26.0",
+    "vscode-theme-generator": "^0.1.5"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.12",
+    "@types/node": "^16.4.5",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}
